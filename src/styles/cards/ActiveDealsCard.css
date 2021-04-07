@@ -1,0 +1,12 @@
+
+.card-wrapper {
+  border-radius: 0px;
+  background: #fff;
+  border: solid #eee;
+  border-width: 1px;
+}
+
+.card-list {
+  margin-left: 25px;
+  margin-right: 25px;
+}

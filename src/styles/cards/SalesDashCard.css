@@ -1,0 +1,15 @@
+.card-wrapper {
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0px 3px 15px 0px rgb(0, 0, 0, 0.08);
+}
+
+.card-title {
+  margin-left: 1em;
+}
+
+.sales-metrics-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

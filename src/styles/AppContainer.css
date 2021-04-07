@@ -1,0 +1,24 @@
+.app-container {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: white;
+}
+
+.app-container__layout {
+  margin-top: 65px;
+  height: 100%;
+  background: white;
+}
+
+
+.layout__sider {
+  background: #fff;
+  z-index: 2;
+  overflow: "auto";
+  height: 100%;
+  background: "white";
+  position: fixed;
+  left: 0;
+}
+
