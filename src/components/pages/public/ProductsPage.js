@@ -47,9 +47,7 @@ const ProductsPage = () => {
               </div>
             </div>
           </div>
-          <div className="scroll-prompt">
-            <Text>Feature Comparison</Text>
-          </div>
+        
         </div>
       </div>
     </div>
