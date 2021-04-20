@@ -8,7 +8,7 @@ import "../../../styles/pages/Dashboard.css";
 import { useQuery, useLazyQuery } from "@apollo/client";
 import DashboardGrid from "./DashboardGrid";
 import { CURRENT_USER, REFRESH_ACCESS_TOKEN } from "../../../apollo/queries/AuthQueries";
-
+import privateRoute from "../../App/privateRoute"
 
 const Dashboard = props => {
 
@@ -51,4 +51,4 @@ const Dashboard = props => {
   );
 };
 
-export default Dashboard;
+export default privateRoute(Dashboard, 'home');

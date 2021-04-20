@@ -1,0 +1,32 @@
+.footer-wrapper {
+  background: black;
+  height: 250px;
+  width: 100%;
+  padding: 0 300px
+}
+
+
+.copyright-container {
+  position: absolute;
+  bottom: 25px;
+  width: calc(100% - 600px)
+}
+
+.copyright-notice {
+  display: table;
+  margin: 0 auto;
+  width: 300px;
+  color: gray;
+  bottom: 25px;
+  text-align: center;
+}
+
+.footer-logo {
+  padding-top: 80px;
+  padding-bottom: 20px;
+}
+
+.filter-gray {
+  filter: invert(25%) sepia(0%) saturate(1514%) hue-rotate(147deg) brightness(88%) contrast(78%)
+}
+

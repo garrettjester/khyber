@@ -5,7 +5,6 @@ import {
   //createHttpLink, 
   InMemoryCache,
   fromPromise,
-  useApolloClient
  // ApolloLink,
   //HttpLink
 } from "@apollo/client"
@@ -13,9 +12,9 @@ import {
 
 import { onError } from 'apollo-link-error';
 import { ApolloLink } from 'apollo-link';
-import {accessToken, isLoggedIn, storeLogin} from '../utils/auth'
+import {accessToken, storeLogin} from '../utils/auth'
 import { REFRESH_ACCESS_TOKEN } from "./queries/AuthQueries";
-import { Redirect } from "react-router";
+import history from "../utils/history"
 
 let apolloClient;
 
@@ -27,15 +26,15 @@ const silentRefresh = () => {
 };
 
 
-const errorLink = onError(({graphQLErrors, networkError, operation, forward}) => {
+const errorLink = onError(({graphQLErrors, operation, forward}) => {
   if (graphQLErrors) {
     console.log(graphQLErrors)
     for (let err of graphQLErrors) {
       switch(err.extensions.code) {
         case "UNAUTHORIZED":
         return fromPromise(
-          silentRefresh().catch(err => {
-            <Redirect to="/auth"></Redirect>
+          silentRefresh().catch((err) => {
+            history.push("/auth")
             return
           })
         )
@@ -79,7 +78,7 @@ const authMiddleware = new ApolloLink((operation, forward) => {
 
 apolloClient = new ApolloClient({
   connectToDevTools: true,
-  link: errorLink.concat(concat(authMiddleware, link)), 
+  link: concat(authMiddleware, link), 
   cache: new InMemoryCache()
 });
 

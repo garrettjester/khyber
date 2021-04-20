@@ -1,0 +1,50 @@
+.AppHeader-Wrapper {
+  position: fixed;
+  z-index: 3;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 65px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  border-bottom: solid #eee;
+  border-width: 1px;
+}
+
+.AppHeader-Logo {
+  margin-left: 25px;
+}
+
+
+.AppHeader-Search {
+  min-width: 400px;
+}
+
+
+.AppHeader-RightContent {
+  margin-right: 18px;
+}
+
+.filter-white {
+  filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(93deg) brightness(103%) contrast(103%);
+}
+
+
+.AppHeader-Wrapper-Dark {
+  position: fixed;
+  z-index: 3;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 65px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background: #000;
+  border-bottom: solid #353535;
+  border-width: 1px;
+}

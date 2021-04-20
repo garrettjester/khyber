@@ -1,6 +1,6 @@
 import { Input, AutoComplete } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
-import "../../styles/AppSearch.css"
+import "../../styles/components/AppSearch.css"
 
 const renderTitle = (title) => (
   <span>

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import * as actions from "../../actions";
 
 
-export default (ChildComponent) => {
+const privateRoute = (ChildComponent, pushTo) => {
   class PrivateRoute extends Component {
     componentDidMount() {
       this.checkAuthentication();
@@ -15,9 +15,15 @@ export default (ChildComponent) => {
 
     checkAuthentication() {
       if (!this.props.auth) {
-        this.props.history.push("/auth");
+        if (pushTo) {
+          this.props.history.push(`/${pushTo}`)
+          return
+        } else {
+          this.props.history.push("/auth");
+        }
       }
     }
+    
     render() {
       return <ChildComponent {...this.props} />;
     }
@@ -29,3 +35,5 @@ export default (ChildComponent) => {
 
   return connect(mapStateToProps, actions)(PrivateRoute);
 };
+
+export default privateRoute;

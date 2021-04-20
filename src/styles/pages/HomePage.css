@@ -1,0 +1,85 @@
+.homepage-wrapper {
+  position: absolute;
+  background: white;
+  height: 100%;
+  width: 100%
+}
+
+.homepage-content {
+  position: absolute;
+  margin-top: 65px;
+  width: 100%;
+}
+
+.homepage-landing-tile {
+  height: calc(100vh - 65px);
+  width: 100%;
+  background: #fff;
+}
+
+
+
+.landing-title {
+  font-family: "Roboto", sans-serif;
+  font-size: 28px;
+  line-height: 35px;
+  margin: 0px;
+  padding: 0px;
+}
+
+.landing-subtitle {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  margin: 0px;
+  margin-top: 15px;
+  padding: 0px;
+  font-size: 17px;
+  color: gray;
+}
+
+.duo-tile {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  width: 100%
+}
+
+.duo-element {
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1;
+}
+
+
+.vertical-container {
+  display: table;
+  position: relative;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.middle {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+
+.inner {
+  margin-left: 200px;
+  padding-right: 260px;
+  margin-bottom: 100px;
+  width: 100%
+}
+
+
+
+
+.vertically-centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+

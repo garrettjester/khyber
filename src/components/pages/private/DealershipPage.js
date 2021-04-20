@@ -13,7 +13,7 @@ const DealershipPage = props => {
 
   console.log("ATTEMPTING TO LOAD DEALERHIP PAGE")
   return (
-    <div className="page-wrapper">
+    <div className="page-wrapper" >
       <Title level={4}>Audi West Chester</Title>
       <Tabs defaultActiveKey="1">
         <TabPane tab="General" key="1">

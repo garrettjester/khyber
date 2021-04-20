@@ -12,7 +12,6 @@ export const CREATE_USER = gql`
 `;
 
 
-
 export const GET_USER = gql`
   query GetUser($id: ID!) {
     firstName

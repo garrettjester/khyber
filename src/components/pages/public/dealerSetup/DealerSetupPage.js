@@ -1,85 +1,112 @@
-import React from "react";
-import {useMutation } from '@apollo/client';
-import { CheckCircleFilled } from "@ant-design/icons";
-import { Typography, Divider, Collapse, Form, Input, Row, Col, Button, Select } from "antd";
-import RootUserForm from "./RootUserForm";
-import DealershipForm from "./DealershipForm";
-import setuplogo from "../../../../setup-logo.svg"
-import BillingForm from "./BillingForm";
-import {CREATE_DEALER} from "../../../../apollo/queries/DealerQueries";
-const { Title } = Typography;
-const { Panel } = Collapse;
+import React, { useState } from "react";
+import { useMutation } from "@apollo/client";
+import { Typography, Button, Row, Col, Input, Form, Select } from "antd";
+import setuplogo from "../../../../setup-logo.svg";
+import StepWizard from "react-step-wizard";
+import { CREATE_DEALER } from "../../../../apollo/queries/DealerQueries";
+import { LoadingOutlined } from "@ant-design/icons";
 
+import {
+  RootUserStep,
+  ConfirmStep,
+  DealershipStep,
+  BillingStep,
+} from "./steps";
+
+import "../../../../styles/pages/DealershipSetupPage.css";
+
+const { Text } = Typography;
 
 
 const DealerSetupPage = () => {
+  const [createDealer, { loading }] = useMutation(CREATE_DEALER, {
+    onCompleted(data) {
+      
+    }
+  });
 
-  const [createDealer, { data }] = useMutation(CREATE_DEALER);
+  const [state, setState] = useState({
+    form: {},
+    currentStep: 1,
+  });
 
-  const genExtra = () => (
-    <CheckCircleFilled
-      onClick={(event) => {
-        // If you don't want click extra trigger collapse, you can prevent this:
-        event.stopPropagation();
-      }}
-    />
-  );
+  const updateForm = (key, value) => {
+    const { form } = state;
+    form[key] = value;
+    console.log('Form updated', state)
+    console.log('email', state.form.email)
+  };
 
-  const callback = () => {};
+  const onStepChange = (stats) => {
+    let { currentStep } = state;
+    currentStep = stats.activeStep;
+    setState({ ...state, currentStep });
+  };
 
-  return (
-    <div style={{ background: "#fff", height: "100%" }}>
-      <img style={{marginLeft: '15px', padding: '20px',width: '230px'}} src={setuplogo}/>
-      <Divider style={{margin: 0}}/>
-      <Row>
-        <Col 
-        xs={{ span: 24, offset: 0}}
-        md={{ span: 24, offset: 0}}
-        lg={{ span: 24, offset: 0}}
-        xl={{ span: 16, offset: 4}}
-        >
-          <Title 
-          style={{
-            paddingTop: '40px', 
-            paddingLeft: '40px', 
-            marginBottom: '20px'}}
-          level={3}>
-            Let's configure your dealership.
-          </Title>
-          <div
-            style={{
-              margin: "0 40px",
-              borderRadius: "6px",
-              padding: "10px",
-              background: "white",
-              border: "solid #eee",
-              borderWidth: "1px",
-              boxShadow: "0px 3px 10px 2px rgba(0, 0, 0, .05)",
-            }}
-          >
-            <Collapse bordered={false}style={{border: 'none'}} defaultActiveKey={["1"]} onChange={callback}>
-              <Panel style={{background: 'white', fontWeight: 700}}header="Root User Information" key="1" extra={genExtra()}>
-                <RootUserForm/>
-              </Panel>
-              <Panel 
-              disabled={true}
-              style={{background: 'white', fontWeight: 700}} 
-              header="Dealership Information" key="2" 
-              extra={genExtra()}>
-                <DealershipForm/>
-              </Panel>
-              <Panel
-              disabled={true} 
-              style={{background: 'white', fontWeight: 700}} 
-              header="Billing Information" key="3" extra={genExtra()}>
-                <BillingForm />
-              </Panel>
-            </Collapse>
-          </div>
-        </Col>
-      </Row>
+  const onComplete = () => {
+    const {
+      firstName, 
+      lastName, 
+      email, 
+      password, 
+      manufacturer, 
+      name, 
+      dealerCode,
+      address
+     } = state.form
+
+    createDealer({ 
+      variables: {
+        user: { firstName, lastName, email, password },
+        dealer: { manufacturer, name, dealerCode },
+        address
+      }
+    });
+  }
+
+  const renderForm = () => {
+    return (
+      <div style={{width: '600px'}}>
+            <div className="wizard-header">
+              <Text style={{fontSize: '16px'}} type="secondary" level={5}>
+                Dealership setup
+              </Text>
+              <Text type="secondary">{`Step ${state.currentStep} of 4`}</Text>
+            </div>
+            <div className="wizard-step-container">
+              <StepWizard isHashEnabled={true} onStepChange={onStepChange} initialStep={'root-user'}>
+                <RootUserStep hashKey={'root-user'} update={updateForm} email={state.form.email} />
+                <ConfirmStep hashKey={'confirm-email'} update={updateForm} sentTo={state.form.email} />
+                <DealershipStep hashKey={'dealership-info'} update={updateForm} />
+                <BillingStep hashKey={'billing-info'} update={updateForm} onComplete={onComplete}/>
+              </StepWizard>
+            </div>
+        </div>
+    )
+  }
+
+
+  const renderLoader = () => {
+    return(
+      <div style={{ width: "600px", marginTop: '200px'}}>
+      <LoadingOutlined style={{fontSize: '30px', marginBottom: '15px'}} spin={true}/>
+      <br/>
+      <Text style={{fontSize: '16px'}} type="secondary">Creating your dealership...</Text>
     </div>
-  );
+    )
+  }
+
+  
+  return (
+    <div className="dealership-setup-wrapper">
+      <img className="setup-logo" src={setuplogo} />
+      <div className="centered-wrapper">
+        <div className="wizard-wrapper">
+          {(loading) ? renderLoader() : renderForm() }
+        </div>
+      </div>
+    </div>
+  )
 };
 
 

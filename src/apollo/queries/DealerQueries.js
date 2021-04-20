@@ -13,7 +13,6 @@ query GetDealer($id: ID!) {
 `;
 
 
-
 export const GET_CUSTOMERS = gql`
 query GetDealer($id: ID!) {
   getDealer(id:$id) { 
@@ -26,6 +25,7 @@ query GetDealer($id: ID!) {
   }
 }
 `;
+
 
 export const VERIFY_ROOT_EMAIL = gql`
   mutation VerifyRootEmail($email: String!) {
@@ -46,6 +46,15 @@ export const CONFIRM_ROOT_EMAIL = gql`
   }
 `;
 
+
+export const CLAIM_ACCESS_CODE = gql`
+  mutation ClaimAccessCode($code: String!) {
+    claimAccessCode(code: $code) {
+      success
+      message
+  }
+}
+`
 
 
 export const CREATE_DEALER = gql`

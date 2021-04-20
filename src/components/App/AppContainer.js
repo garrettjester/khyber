@@ -1,12 +1,7 @@
 import React from 'react'
 import { Layout} from "antd";
 import AppSider from "./AppSider";
-
 import AppHeader from "./AppHeader"
-
-
-
-
 import "../../styles/AppContainer.css"
 
 const {Sider} = Layout
