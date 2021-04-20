@@ -8,6 +8,7 @@ import productLogo1 from "../../../F1.png";
 import productLogo2 from "../../../Daytona.png";
 import { NavLink } from "react-router-dom";
 import f1car from "../../../f1-car.png";
+import daytonaCar from "../../../daytona-car.png";
 
 const { Text } = Typography;
 
@@ -38,6 +39,7 @@ const ProductsPage = () => {
                     <ProductColumn
                       logo={productLogo2}
                       title="Khyber Daytona"
+                      product="daytona"
                       description="An intelligent deal pipeline for sales"
                     />
                   </div>
@@ -75,16 +77,12 @@ const ProductColumn = (props) => {
           {props.product === "f1" ? "Request Access" : "Coming Soon"}
         </Button>
       </div>
- 
       <img
-      id="formula-one"
-        className="f1-car"
+        id={(props.product === "f1") ? "formula-one" : "daytona"}
+        className={(props.product === "f1") ? "f1-car" : "daytona-car"}
         alt="Formula One Car"
-        src={f1car}
+        src={(props.product === "f1") ? f1car : daytonaCar}
       ></img>
-   
-
-      
     </div>
   );
 };
