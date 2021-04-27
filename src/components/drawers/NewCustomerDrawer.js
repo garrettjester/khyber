@@ -1,5 +1,5 @@
-import { useMutation, useQuery } from "@apollo/client";
-import { Drawer, Form, Button, Row, Col, Select, Input, DatePicker } from "antd";
+import { useMutation } from "@apollo/client";
+import { Drawer, Form, Button, Row, Col, Select, Input } from "antd";
 import React, {useState} from "react";
 import { CREATE_CUSTOMER } from "../../apollo/queries/CustomerQueries";
 

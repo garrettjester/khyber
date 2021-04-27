@@ -5,12 +5,13 @@ import { Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { CLAIM_ACCESS_CODE } from "../../../../../apollo/queries/DealerQueries";
 import {WarningOutlined} from "@ant-design/icons";
-
+import {useMediaQuery} from "react-responsive";
 
 const {Text} = Typography;
 
 const BillingStep = props => {
 
+  const isMobile = useMediaQuery({maxWidth: 800})
   const [accessCode, setAccessCode] = useState('')
   const [validAccessCode, setValidAccessCode] = useState(true);
   const [error, setError] = useState(null);
@@ -57,22 +58,25 @@ const BillingStep = props => {
     }
   }
 
-  
+ 
+
+
   return (
   <RegisterStep 
   title="Enter access code" 
-  subtitle="Use your access code to launch your dealership">
+  subtitle="Use an access code to launch your dealership">
     <Row style={{alignItems: 'center', width: '100%'}}>
-      <Col span={16}>
+      <Col span={(isMobile) ? 24: 16}>
         <Input 
+        size={(isMobile) ? 'large': 'middle'}
         name="accessCode"
         onChange={handleOnChange}
-        style={{marginTop: '8px', marginBottom: '5px'}}
+        style={{marginBottom: '5px'}}
         placeholder="Access code" />
       </Col>
-      <Col span={8}>
+      <Col span={(isMobile) ? 24: 8}>
         <Button style={{
-          marginTop: '8px',
+          height: (isMobile) ? '40px': '',
           marginBottom: '5px',
           width: '100%'}}
           loading={loading}

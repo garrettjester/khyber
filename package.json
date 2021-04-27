@@ -13,18 +13,21 @@
     "apollo-link-error": "^1.1.13",
     "craco-less": "^1.17.1",
     "graphql": "^15.5.0",
+    "less": "^4.1.1",
+    "less-loader": "^8.0.0",
     "react": "^17.0.1",
+    "react-div-100vh": "^0.6.0",
     "react-dom": "^17.0.1",
+    "react-hamburger-menu": "^1.2.1",
     "react-plaid-link": "^3.1.0",
     "react-redux": "^7.2.3",
+    "react-responsive": "^8.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "react-step-wizard": "^5.3.6",
     "redux": "^4.0.5",
     "universal-cookie": "^4.0.4",
-    "web-vitals": "^1.1.0",
-    "less": "^4.1.1",
-    "less-loader": "^8.0.0"
+    "web-vitals": "^1.1.0"
   },
   "scripts": {
     "start": "craco start",
@@ -33,6 +36,9 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
+    "rules": {
+      "no-unused-vars": "off"
+    },
     "extends": [
       "react-app",
       "react-app/jest"

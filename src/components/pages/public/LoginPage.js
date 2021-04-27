@@ -1,113 +1,145 @@
 import React, { useState } from "react";
-import { Form, Input, Button, Typography } from "antd";
-import logo from "../../../khyber.svg";
+import { Form, Input, Button, Divider } from "antd";
 import "../../../styles/pages/LoginPage.css";
-import {connect} from "react-redux";
-import * as actions from "../../../actions"
+import { connect } from "react-redux";
+import * as actions from "../../../actions";
 import { SIGN_IN } from "../../../apollo/queries/AuthQueries";
 import { useLazyQuery } from "@apollo/client";
-import { Redirect } from "react-router";
 import { storeLogin } from "../../../utils/auth";
-const { Title } = Typography;
+import CenterY from "../../layout/CenterY";
+import BoxElement from "../../App/BoxElement";
+import Div100vh from "react-div-100vh";
+import { useMediaQuery } from "react-responsive";
+import StaticLogo from "../../App/StaticLogo";
+import { EyeTwoTone, EyeInvisibleOutlined } from "@ant-design/icons";
 
-const LoginPage = props => {
 
+const LoginPage = (props) => {
+
+  const isMobile = useMediaQuery({maxWidth: 800})
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [signIn, { data, loading, error }] = useLazyQuery(SIGN_IN, {
     variables: { email, password },
     fetchPolicy: "network-only",
     onCompleted(data) {
-      if (data) props.changeAuth(true)
-      console.log("SIGN IN DATA", data)
+      if (data) props.changeAuth(true);
       storeLogin(data.signIn.accessToken);
-      props.history.push("/")
-    }
+      props.history.push("/");
+    },
   });
 
 
-  return (
-    <div className="loginpage">
-      <div className="branding-container">
-        <div>
-          <img className="login-logo" src={logo} alt="khyber logo"></img>
-          <Title style={{ paddingTop: "15px" }} level={3}>
-            Automotive intelligence.
-          </Title>
-        </div>
-      </div>
-      <div className="right-container">
-        <div className="form-container">
-          <Form
-            style={{ width: "330px" }}
-            name="normal_login"
-            className="login-form"
-            initialValues={{
-              remember: true,
-            }}
-            onFinish={() => {
-              signIn();
-            }}
-          >
-            <Form.Item
-              name="email"
-              rules={[
-                {
-                  required: true,
-                  message: "Required.",
-                },
-              ]}
-            >
-              <Input
-                value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                }}
-                size="large"
-                placeholder="Email"
-              />
-            </Form.Item>
-            <Form.Item
-              name="password"
-              rules={[
-                {
-                  required: true,
-                  message: "Required.",
-                },
-              ]}
-            >
-              <Input
-                value={password}
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                }}
-                size="large"
-                type="password"
-                placeholder="Password"
-              />
-            </Form.Item>
+  const renderForm = () => {
+    return (
+      <div className="login-form__container">
+      <h1 className="login-form__title">Sign in</h1>
 
-            <Form.Item>
-              <Button
-                style={{ width: "100%", height: "40px" }}
-                type="primary"
-                htmlType="submit"
-                className="login-form-button"
-                loading={loading}
-              >
-                Log in
-              </Button>
-            </Form.Item>
-          </Form>
-        </div>
+      <Form
+        style={{ width: "100%" }}
+        name="normal_login"
+        initialValues={{
+          remember: true,
+        }}
+        onFinish={() => {
+          signIn();
+        }}
+      >
+        <Form.Item
+          name="email"
+          rules={[
+            {
+              required: true,
+              message: "Required.",
+            },
+          ]}
+        >
+          <Input
+            size={(isMobile) ? 'large' : 'middle'}
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+            placeholder="Email"
+          />
+        </Form.Item>
+        <Form.Item
+          
+          name="password"
+          rules={[
+            {
+              required: true,
+              message: "Required.",
+            },
+          ]}
+        >
+          <Input.Password
+            size={(isMobile) ? 'large' : 'middle'}
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+            placeholder="Password"
+            iconRender={visible => (visible ? <EyeTwoTone/> : <EyeInvisibleOutlined/>)}
+          />
+        </Form.Item>
+
+        <Form.Item>
+          <Button
+            style={{ width: "100%", height: "38px" }}
+            type="primary"
+            htmlType="submit"
+            className="login-form-button"
+            loading={loading}
+          >
+            Log in
+          </Button>
+        </Form.Item>
+      </Form>
+      <Divider style={{ margin: "0" }}></Divider>
+      <div className="forgot-password-container">
+        <text className="login-subtitle">Forgot password?</text>
+        <a
+          href="www.khyber.io/reset-password"
+          style={{ fontSize: "13px", marginLeft: "5px" }}
+        >
+          Reset password
+        </a>
       </div>
     </div>
+    )
+  }
+
+
+
+  if (isMobile) {
+    return (
+      <Div100vh>
+        <StaticLogo/>
+        <CenterY>
+          {renderForm()}
+        </CenterY>
+      </Div100vh>
+    )
+  }
+  return (
+    <Div100vh>
+      <div className="login-page__wrapper">
+        <StaticLogo/>
+        <CenterY width="400px">
+          <div className="box-wrapper">
+            <BoxElement>
+              {renderForm()}
+            </BoxElement>
+          </div>
+        </CenterY>
+      </div>
+    </Div100vh>
   );
 };
 
-
-const mapStateToProps = state => {
-  return {auth: state.auth};
-}
+const mapStateToProps = (state) => {
+  return { auth: state.auth };
+};
 
 export default connect(mapStateToProps, actions)(LoginPage);

@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import React from "react";
 import { Redirect } from "react-router";
 import { Menu, Dropdown, Button } from "antd";
@@ -46,7 +46,7 @@ const ProfileDropdown = () => {
   };
 
   const dealershipItem = () => {
-    if (data.currentUser.role == "root") {
+    if (data.currentUser.role === "root") {
       return (
         <Menu.Item key="2" icon={<HomeOutlined />}>
           <NavLink to="/mydealership">My dealership</NavLink>

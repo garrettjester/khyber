@@ -31,6 +31,8 @@ const errorLink = onError(({graphQLErrors, operation, forward}) => {
     console.log(graphQLErrors)
     for (let err of graphQLErrors) {
       switch(err.extensions.code) {
+        default: 
+          return forward(operation)
         case "UNAUTHORIZED":
         return fromPromise(
           silentRefresh().catch((err) => {

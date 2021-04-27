@@ -1,6 +1,6 @@
 import React from "react"
 import {Tabs, Typography} from 'antd';
-import { useParams } from 'react-router-dom';
+//import { useParams } from 'react-router-dom';
 import privateRoute from "../../App/privateRoute"
 const {Title} = Typography;
 const {TabPane} = Tabs;
@@ -8,7 +8,7 @@ const {TabPane} = Tabs;
 
 const DealershipPage = props => {
 
-  const {dealerId} = useParams();
+  //const {dealerId} = useParams();
   //const {data} = useQuery(GET_DEALER);
 
   console.log("ATTEMPTING TO LOAD DEALERHIP PAGE")

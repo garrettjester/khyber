@@ -1,4 +1,10 @@
-.AppHeader-Wrapper {
+
+.app-header__container {
+  
+}
+
+
+.app-header__bar {
   position: fixed;
   z-index: 3;
   top: 0;
@@ -9,12 +15,12 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  background: #fff;
+  background: white;
   border-bottom: solid #eee;
   border-width: 1px;
 }
 
-.AppHeader-Logo {
+.app-header__logo {
   margin-left: 25px;
 }
 
@@ -23,8 +29,7 @@
   min-width: 400px;
 }
 
-
-.AppHeader-RightContent {
+.app-header__right-content {
   margin-right: 18px;
 }
 
@@ -33,7 +38,7 @@
 }
 
 
-.AppHeader-Wrapper-Dark {
+.app-header__bar__dark {
   position: fixed;
   z-index: 3;
   top: 0;
@@ -47,4 +52,22 @@
   background: #000;
   border-bottom: solid #353535;
   border-width: 1px;
+}
+
+.app-header__hamburger-container {
+  z-index: 10;
+  padding-left: 24px;
+}
+
+
+.app-header__left-content {
+  display: flex;
+  align-items: center;
+}
+
+
+@media (min-width: 800px) {
+  .app-header__hamburger-container {
+    display: none;
+  }
 }

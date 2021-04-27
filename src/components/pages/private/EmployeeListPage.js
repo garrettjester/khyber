@@ -23,7 +23,7 @@ const EmployeeListPage = () => {
       title: "Name",
       key: "name",
       dataIndex: "name",
-      render: text => <a>{text}</a>
+      render: text => <a href="/">{text}</a>
     },
     {
       title: "Email",

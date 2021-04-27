@@ -1,6 +1,6 @@
 import React, {useState} from "react"; 
 import {useMutation} from "@apollo/client";
-import {Divider, Form, Input, message, Typography} from "antd";
+import {Button, Divider, Form, Input, message, Typography} from "antd";
 import RegisterStep from "./RegisterStep";
 import {CONFIRM_ROOT_EMAIL, VERIFY_ROOT_EMAIL} from "../../../../../apollo/queries/DealerQueries"
 import { onError } from "apollo-link-error";
@@ -81,7 +81,7 @@ const ConfirmStep = (props) => {
         {renderError()}
         <Divider />
         <Text type="secondary">Didn't get a code?</Text>
-        <a onClick={handleResentClicked} style={{marginLeft: '8px'}}>Resend.</a>
+        <Button type="text" onClick={handleResentClicked} style={{marginLeft: '8px'}}>Resend.</Button>
       </Form>
     </RegisterStep>
   );

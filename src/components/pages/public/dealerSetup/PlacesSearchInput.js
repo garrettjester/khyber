@@ -12,11 +12,16 @@ const PlacesSearchInput = props => {
   }
   
   useEffect(() => {
+    
     loadScript(
       `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_PLACES_API_KEY}&libraries=places`,
-      () => handleScriptLoad(setQuery, autoCompleteRef, props.onSelect)
+      
+      () => {
+        handleScriptLoad(setQuery, autoCompleteRef, props.onSelect)
+      }
     );
-  }, [])
+     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])  
   
   return (
   <div className="places-search-input">

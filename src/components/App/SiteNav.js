@@ -4,7 +4,7 @@ import "../../styles/components/SiteNav.css"
 
 const SiteNav = () => {
   return (
-    <div style={{}} className="sitenav-wrapper">
+    <div style={{}} className="sitenav-wrapper hidden-mobile">
       <ul>
         <li>
           <NavLink className="sitenav-item" to="/about">

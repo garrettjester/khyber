@@ -1,44 +1,40 @@
-.products-wrapper {
+.product-page__container {
+  display: block;
   height: 100%;
   width: 100%;
-  background-color: black;
+  overflow-x: hidden;
+  background: black;
+  padding: 0px 200px;
 }
 
-.duo-tile {
+.product-page__duo-tile {
   display: flex;
   flex-direction: row;
   height: 100%;
-  width: 100%;
+  background-color: black;
+ 
 }
 
-.duo-element {
+.duo-item {
+  width: 100%;
   display: flex;
-  flex-wrap: wrap;
   flex: 1;
 }
 
-.products-content {
-  position: absolute;
-  width: 100%;
-  height: 100vh;
-}
 
 
-.products-landing-tile {
-  height: calc(100vh);
-  width: 100%;
-  padding: 0 200px;
-  background: #000;
-}
+
 
 
 .product-column-wrapper {
+  position: relative;
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  padding-bottom: 60px;
 }
 
 .product-branding-box {
@@ -56,19 +52,10 @@
 }
 
 
-.product-title {
-  font-family: 'Roboto', sans-serif;
-  font-size: 18px;
-  font-weight: 400;
-  color: #fff;
-}
-
-
 .product-features {
   display: flex;
   color: gray;
   text-align: center;
-  margin: 0 45px;
   font-size: 16px;
 }
 
@@ -79,13 +66,11 @@
 }
 
 
-
-
 .f1-car{
   height: 100%;
   position: absolute;
   padding: 200px 0;
-  left: calc(-100vw/5);
+  left: calc(-100vw/6);
   opacity: 0;
   visibility: hidden;
   transition: all 0.4s ease-out;
@@ -99,6 +84,7 @@
   right: calc(-100vw/5);
   opacity: 0;
   visibility: hidden;
+  overflow: hidden;
   transition: all 0.4s ease-out;
 }
 
@@ -125,4 +111,44 @@
   visibility: visible;
   opacity: 1;
   animation: all 1s ease-in forwards;
+}
+
+.dark {
+  background-color: black;
+}
+
+@media (max-width: 800px) {
+
+  .fullscreen-wrapper-products {
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+  }
+
+  .product-column-wrapper {
+    scroll-snap-align: center;
+    padding-bottom: 40px;
+    scroll-snap-align: center;
+    flex: none;
+  }
+
+
+
+  
+  .product-page__container {
+    top: 0;
+    bottom: 0;
+    height: auto;
+    padding: 0;
+    
+  }
+
+  .product-page__duo-tile {
+    height: 100%;
+    display: block;
+    flex-direction: column;
+  }
+
+
 }

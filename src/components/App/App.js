@@ -5,7 +5,6 @@ import { ApolloProvider } from "@apollo/client";
 import client from "../../apollo/ApolloClient";
 import LoginPage from "../pages/public/LoginPage";
 import DealerSetupPage from "../pages/public/dealerSetup/DealerSetupPage";
-import HomePage from "../pages/public/HomePage";
 
 import {
   Dashboard,
@@ -16,21 +15,25 @@ import {
   EmployeeListPage,
   DealershipPage,
 } from "../pages/private";
-import ProductsPage from "../pages/public/ProductsPage";
-import AccessRequestPage from "../pages/public/AccessRequestPage";
+
+import SiteWrapper from "./SiteWrapper";
+import { connect } from "react-redux";
 
 
 
 
 class App extends Component {
+
+ 
   render() {
+    console.log('APP PROPS', this.props)
     return (
-      <div className="container">
+      <div className={`container ${(this.props.darkMode) ? 'app-dark-mode' : ''}`}>
         <ApolloProvider client={client}>
-          <Switch>
-            <Route path="/home" component={HomePage}/>
-            <Route path="/products" component={ProductsPage}/> 
-            <Route path="/request-access" component={AccessRequestPage}/> 
+        <Switch>
+            <Route path="/home" component={SiteWrapper}/>
+            <Route path="/products" component={SiteWrapper}/> 
+            <Route path="/request-access" component={SiteWrapper}/> 
             <Route exact path="/" component={Dashboard} />
             <Route path="/register" component={DealerSetupPage}/>
             <Route path="/auth" component={LoginPage} />
@@ -48,4 +51,9 @@ class App extends Component {
   }
 }
 
-export default App;
+
+const mapStateToProps = state => {
+  return {darkMode: state.darkMode.dark_mode}
+}
+
+export default connect(mapStateToProps)(App);

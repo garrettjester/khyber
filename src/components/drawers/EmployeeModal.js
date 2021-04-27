@@ -1,6 +1,6 @@
 import React, {useState} from "react"
 import {Modal, Form, Row, Col, Select, Input} from "antd"
-import { fromError, useMutation } from "@apollo/client"
+import { useMutation } from "@apollo/client"
 import { CREATE_USER } from "../../apollo/queries/UserQueries"
 const {Option} = Select;
 
