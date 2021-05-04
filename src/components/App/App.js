@@ -26,7 +26,6 @@ class App extends Component {
 
  
   render() {
-    console.log('APP PROPS', this.props)
     return (
       <div className={`container ${(this.props.darkMode) ? 'app-dark-mode' : ''}`}>
         <ApolloProvider client={client}>

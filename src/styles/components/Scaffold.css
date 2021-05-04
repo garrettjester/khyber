@@ -1,0 +1,41 @@
+.scaffold {
+  display: flex;
+  height: auto;
+  width: 100%;
+}
+
+.scaffold__left-gutter {
+  flex: 1;
+
+}
+
+.scaffold__right-gutter {
+  flex: 1;
+
+}
+
+.scaffold__content {
+  flex: 4;
+}
+
+@media (max-width: 1200px) {
+  .scaffold__left-gutter {
+    display: none;
+  }
+
+  .scaffold__right-gutter {
+    display: none;
+  }
+
+  .scaffold__content {
+    padding-left: 100px;
+    padding-right: 100px;
+  }
+}
+
+
+@media (max-width: 800px) {
+  .scaffold__content {
+    padding: 0;
+  }
+}

@@ -1,6 +1,6 @@
 import { Button, Divider, Typography } from "antd";
-import React, { Component, createRef, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import React, { Component } from "react";
+import { NavHashLink as NavLink } from "react-router-hash-link";
 import { connect } from "react-redux";
 import history from "../../utils/history";
 import * as actions from "../../actions";
@@ -24,7 +24,7 @@ class MobileMenu extends Component {
                 <li className="sidemenu__nav__listitem">
                   <NavLink
                     className="sidemenu__nav__link"
-                    to="/about"
+                    to="/home#about"
                     
                   >
                     About

@@ -1,5 +1,6 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import {NavHashLink as NavLink} from 'react-router-hash-link'
+//import { NavLink } from "react-router-dom";
 import "../../styles/components/SiteNav.css"
 
 const SiteNav = () => {
@@ -7,7 +8,7 @@ const SiteNav = () => {
     <div style={{}} className="sitenav-wrapper hidden-mobile">
       <ul>
         <li>
-          <NavLink className="sitenav-item" to="/about">
+          <NavLink className="sitenav-item" to="/home#about">
             About
           </NavLink>
         </li>

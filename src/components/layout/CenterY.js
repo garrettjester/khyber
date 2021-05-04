@@ -3,9 +3,9 @@ import "../../styles/components/CenterY.css"
 
 const CenterY = (props) => {
   return (
-    <div className="outer">
+    <div style={props.style} className="outer">
       <div className="middle">
-        <div style={{width: props.width || '100%'}} className="inner">
+        <div style={{width: props.width || '100%', height: props.height || 'auto'}} className="inner">
           {props.children}
         </div>
       </div>

@@ -1,11 +1,10 @@
-import React, {Component, useEffect} from "react";
+import React, {useEffect} from "react";
 import AppHeader from "../App/AppHeader";
 import "../../styles/components/SiteWrapper.css";
 import { Switch, Route, useLocation } from "react-router-dom";
 import ProductsPage from "../pages/public/ProductsPage";
 import AccessRequestPage from "../pages/public/AccessRequestPage";
-import SiteFooter from "./SiteFooter";
-import HomePage from "../pages/public/HomePage";
+import HomePage from "../pages/public/Home/HomePage";
 import { connect } from "react-redux";
 import ScrollToTop from "./ScrollToTop";
 import Div100vh from 'react-div-100vh'

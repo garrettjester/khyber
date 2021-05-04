@@ -1,0 +1,36 @@
+.full-width-grid {
+  display: grid;
+  width: 100%;
+  height: auto;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 30px;
+}
+
+.overview__container {
+  padding: 130px 0px;
+  
+}
+
+
+#overview-title {
+  margin-bottom: 30px;
+}
+
+@media (max-width: 800px) {
+  .full-width-grid {
+    grid-template-columns: 1fr;
+    row-gap: 40px;
+  }
+
+  .overview__container {
+    padding: 80px 40px;
+    
+  }
+
+  #overview-title {
+    margin-bottom: 45px;
+  }
+  
+
+}
+  

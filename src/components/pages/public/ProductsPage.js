@@ -15,6 +15,7 @@ import { useMediaQuery } from "react-responsive";
 const { Text } = Typography;
 
 const ProductsPage = (props) => {
+
   const isMobile = useMediaQuery({ maxWidth: 800 });
 
   if (isMobile) {
@@ -37,7 +38,7 @@ const ProductsPage = (props) => {
   }
 
   return (
-    <div className="fullscreen-wrapper">
+    <div className="fullscreen-wrapper-products">
       <div className="product-page__container">
         <div className="product-page__duo-tile">
           <div className="duo-item">
