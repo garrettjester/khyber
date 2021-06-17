@@ -2,7 +2,9 @@ import React from 'react';
 import {Typography, Divider} from 'antd';
 import InventorySearchCard from "../../cards/InventorySearchCard"
 import "../../../styles/pages/InventoryPage.css";
+import privateRoute from "../../App/privateRoute";
 const {Title} = Typography;
+
 
 const InventoryPage = () => {
 
@@ -20,4 +22,4 @@ const InventoryPage = () => {
   )
 }
 
-export default InventoryPage;
+export default privateRoute(InventoryPage);

@@ -60,9 +60,11 @@ export const CLAIM_ACCESS_CODE = gql`
 export const CREATE_DEALER = gql`
   mutation CreateDealer($input: CreateDealerInput!) {
     createDealer(input: $input) {
-      name
-      manufacturer
-      dealerCode
+      user {
+        firstName
+        lastName
+      }
+      accessToken
     }
   }
 `;

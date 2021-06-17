@@ -15,14 +15,14 @@
 .wizard-wrapper {
   margin-top: 60px;
   width: 100%;
- 
 }
 
 
 .wizard-container {
   display: block;
   margin-top: 6px;
-  padding: 60px
+  width: 100%;
+  padding: 40px 60px 30px 60px
 }
 
 @media (max-width: 800px) {

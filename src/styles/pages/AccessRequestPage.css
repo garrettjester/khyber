@@ -35,7 +35,7 @@
 .content-wrapper {
   width: 100%;
   height: auto;
-  padding: 10px;
+  padding: 10px 10px 100px 10px;
   overflow-y: auto;
 }
 

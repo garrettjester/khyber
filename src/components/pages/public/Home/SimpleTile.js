@@ -2,7 +2,7 @@ import React from "react";
 import Fade from "react-reveal/Fade";
 import "../../../../styles/pages/Home/BrowserTile.css";
 import FeatureSpec from "./FeatureSpec";
-import Scaffold from "../../../layout/Scaffold";
+import Scaffold from "@khyberlabs/khyberkit.scaffold";
 import inventoryIcon from "../../../../white-inventory.svg";
 import dealIcon from "../../../../white-deal-automation.svg";
 import crmIcon from "../../../../white-crm.svg";

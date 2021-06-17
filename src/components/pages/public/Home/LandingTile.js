@@ -1,13 +1,14 @@
 import React from "react";
 import showroom from "../../../../dealership-sketch.png";
-import CenterY from "../../../layout/CenterY";
+
 import "../../../../styles/pages/Home/HomePage.css";
 import history from "../../../../utils/history";
 import { Button } from "antd";
 import BounceArrow from "../../../App/BounceArrow";
 import Fade from "react-reveal/Fade";
 import { useMediaQuery } from "react-responsive";
-import Scaffold from "../../../layout/Scaffold";
+import Scaffold from "@khyberlabs/khyberkit.scaffold";
+import CenterY from "@khyberlabs/khyberkit.center-y"
 
 const LandingTile = () => {
   const isMobile = useMediaQuery({ maxWidth: 800 });

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "../../../styles/pages/ProductsPage.css";
 import { Typography, Button } from "antd";
 import history from "../../../utils/history";
@@ -6,10 +6,9 @@ import productLogo1 from "../../../F1.png";
 import productLogo2 from "../../../Daytona.png";
 import f1car from "../../../f1-car.png";
 import daytonaCar from "../../../daytona-car.png";
-import { toggleDarkMode } from "../../../actions";
 import { connect } from "react-redux";
 import * as actions from "../../../actions";
-import SiteFooter from "../../App/SiteFooter";
+import Footer from "../../App/Footer";
 import { useMediaQuery } from "react-responsive";
 
 const { Text } = Typography;
@@ -32,7 +31,7 @@ const ProductsPage = (props) => {
         product="daytona"
         description="An intelligent deal pipeline for sales"
       />
-      <SiteFooter/>
+      <Footer/>
     </div>
     )
   }
@@ -58,7 +57,7 @@ const ProductsPage = (props) => {
           </div>
         </div>
       </div>
-      <SiteFooter />
+      <Footer/>
     </div>
   );
 };

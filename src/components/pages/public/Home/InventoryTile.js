@@ -1,13 +1,13 @@
 import React from "react";
 import Fade from "react-reveal/Fade";
 import "../../../../styles/pages/Home/InventoryTile.css";
-import CenterY from "../../../layout/CenterY";
+import CenterY from "@khyberlabs/khyberkit.center-y"
 import inventoryMockup from "../../../../InventoryMockup.svg";
 import Zoom from "react-reveal/Zoom";
 import { useMediaQuery } from "react-responsive";
 import inventoryIcon from "../../../../inventoryIcon.svg";
 import FeatureSpec from "./FeatureSpec";
-import Scaffold from "../../../layout/Scaffold";
+import Scaffold from "@khyberlabs/khyberkit.scaffold";
 
 const featureList = [
   {
@@ -29,6 +29,7 @@ const InventoryTile = () => {
     return featureList.map((feature, index) => {
       return (
         <FeatureSpec
+          key={index}
           index={index}
           title={feature.title}
           description={feature.description}

@@ -14,6 +14,7 @@ const privateRoute = (ChildComponent, pushTo) => {
     }
 
     checkAuthentication() {
+      console.log('AUTH CHECK', this.props.auth)
       if (!this.props.auth) {
         if (pushTo) {
           this.props.history.push(`/${pushTo}`)

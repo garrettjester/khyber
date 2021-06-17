@@ -6,7 +6,7 @@ import ProductsPage from "../pages/public/ProductsPage";
 import AccessRequestPage from "../pages/public/AccessRequestPage";
 import HomePage from "../pages/public/Home/HomePage";
 import { connect } from "react-redux";
-import ScrollToTop from "./ScrollToTop";
+import ScrollToTop from "@khyberlabs/khyberkit.scroll-to-top";
 import Div100vh from 'react-div-100vh'
 import * as actions from "../../actions"
 

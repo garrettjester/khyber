@@ -5,22 +5,23 @@ import PageHeader from "../../App/PageHeader";
 import { useApolloClient, useQuery } from "@apollo/client";
 import { GET_CUSTOMERS } from "../../../apollo/queries/DealerQueries";
 import { CURRENT_USER } from "../../../apollo/queries/AuthQueries";
+import privateRoute from "../../App/privateRoute";
 
 const CRMPage = () => {
-  const client = useApolloClient();
+  
+  
   const [modalVisible, setModalVisible] = useState(false);
-  const { currentUser } = client.readQuery({ query: CURRENT_USER });
-  const { data, refetch } = useQuery(GET_CUSTOMERS, {
+  /*const { data, refetch } = useQuery(GET_CUSTOMERS, {
     variables: { id: currentUser.dealer.id },
-  });
+  });*/
 
   const onCreatedNewCustomer = () => {
     setModalVisible(false);
-    refetch();
+    //refetch();
   };
 
   const tableData = () => {
-    if (data) {
+    /*if (data) {
       return data.getDealer.customers.map((customer) => {
         return {
           key: customer.id,
@@ -29,7 +30,7 @@ const CRMPage = () => {
           email: customer.email,
         };
       });
-    }
+    }*/
   };
 
   const columns = [
@@ -75,4 +76,4 @@ const CRMPage = () => {
   );
 };
 
-export default CRMPage;
+export default privateRoute(CRMPage);

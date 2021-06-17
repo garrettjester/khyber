@@ -1,128 +1,113 @@
 import React, { useState } from "react";
-import {useMutation} from "@apollo/client";
 import RegisterStep from "./RegisterStep";
-import {Form, Row, Col, Input, Button, Typography} from "antd";
-import {VERIFY_ROOT_EMAIL} from "../../../../../apollo/queries/DealerQueries";
-import {EyeInvisibleOutlined, EyeTwoTone} from "@ant-design/icons";
-
-const {Text} = Typography;
+import { Form, Row, Col, Input, Typography, Popover } from "antd";
+import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 
 const RootUserStep = (props) => {
-
-  const [error, setError] = useState(null)
-  const [email, setEmail] = useState('')
-  const [sendCode, {loading}] = useMutation(VERIFY_ROOT_EMAIL, {
-    
-    variables: {email},
-    
-    onCompleted(data) {
-      if (data) {
-        props.goToStep('confirm-email');
-      }
-    },
-
-    onError(err) {
-      setError(err);
-    }
-  });
-
-  const renderError = () => {
-    if (error) {
-      <Text type="danger">Error</Text>
-    }
-  }
-
-
-  const handleSendCode = () => {
-    sendCode({email: props.email});
-  };
-
+  
   const update = (e) => {
-    if (e.target.name === "email") {setEmail(e.target.value)}
     props.update(e.target.name, e.target.value);
   };
 
+  const onUserFormFinish = (values) => {
+    props.goToStep('dealership-info')
+  };
+
+  console.log(props.currentStep);
+
   return (
-    
     <RegisterStep
+      onComplete={onUserFormFinish}
+      formLayout="vertical"
+      previousStep={props.previousStep}
+      submitButtonTitle="Next"
       title="Create root user"
       subtitle="This should be the dealership owner or general manager"
     >
-      <Form 
-      onFinish={handleSendCode}
-      
-      layout="vertical">
-        <Row gutter={16}>
-          <Col span={12}>
-            <Form.Item
-              style={{ marginBottom: "15px", padding: 0 }}
-              label="First name"
-              rules={[{ required: true, message: 'Required.' }]}
-            >
-              <Input
-                name="firstName"
-                onChange={update}
-                placeholder="Enter first name"
-              />
-            </Form.Item>
-          </Col>
-          <Col span={12}>
-            <Form.Item
-              style={{ marginBottom: "18px", padding: 0 }}
-              label="Last name"
-              rules={[{ required: true, message: 'Required.' }]}
-            >
-              <Input
-                name="lastName"
-                onChange={update}
-                placeholder="Enter last name"
-              />
-            </Form.Item>
-          </Col>
-        </Row>
-
-        <Form.Item
-          style={{ marginBottom: "18px", padding: 0 }}
-          label="Email"
-          tooltip="We'll send a 6-digit code to this email."
-          rules={[{ required: true, message: 'Required.' }]}
-        >
-          <Input
-            name="email"
-            value={email}
+      <Row gutter={16}>
+        <Col span={12}>
+          <Form.Item
+            name="firstName"
+            style={{ marginBottom: "15px", padding: 0 }}
+            label="First name"
+            rules={[{ required: true, message: "Required." }]}
+          >
+            <Input 
             onChange={update}
-            
-            placeholder="ex. johndoe@gmail.com"
-          />
-        </Form.Item>
+            name="firstName" 
+            placeholder="Enter first name" />
+          </Form.Item>
+        </Col>
+        <Col span={12}>
+          <Form.Item
+            name="lastName"
+            style={{ marginBottom: "18px", padding: 0 }}
+            label="Last name"
+            rules={[{ required: true, message: "Required." }]}
+          >
+            <Input
+            onChange={update} 
+            name="lastName" 
+            placeholder="Enter last name" />
+          </Form.Item>
+        </Col>
+      </Row>
 
+      <Form.Item
+        name="email"
+        style={{ marginBottom: "18px", padding: 0 }}
+        label="Email"
+        onChange={update}
+        tooltip="We'll send a 6-digit code to this email."
+        rules={[
+          {
+            type: "email",
+            required: true,
+            message: "Required.",
+          },
+        ]}
+      >
+        <Input 
+        onChange={update}
+        name="email" 
+        placeholder="ex. johndoe@gmail.com" />
+      </Form.Item>
+      <Popover
+        title="Requirements:"
+        placement="bottomLeft"
+        content={
+          <div style={{ color: "gray", fontSize: "13px", lineHeight: "13px" }}>
+            <p>- At least 8 characters</p>
+            <p>- 1 number</p>
+            <p>- 1 uppercase letter</p>
+            <p>- 1 lowercase letter</p>
+            <p>- 1 special character</p>
+          </div>
+        }
+      >
         <Form.Item
-          style={{padding: 0, marginBottom: '39px'}}
+          name="password"
+          style={{ padding: 0, marginBottom: "39px" }}
           label="Password"
-          tooltip="Must be at least 8 characters, and contain a number, uppercase letter, and lowercase letter."
-          rules={[{required: true, message: 'Required.'}]}
+          rules={[
+            {
+              required: true,
+              pattern:
+                /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/,
+              message: "Password does not meet requirements.",
+            },
+          ]}
         >
-
           <Input.Password
+            onChange={update}
             placeholder="Create password"
-            iconRender={visible => (visible ? <EyeTwoTone/> : <EyeInvisibleOutlined/>)}
+            iconRender={(visible) =>
+              visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
+            }
             name="password"
           />
-
         </Form.Item>
-
-        {renderError()}
-
-
-        <Button
-          loading={loading}
-          type="primary"
-          htmlType="submit"
-          style={{ width: "100%", height: "40px" }}
-        >
-          Send Code
-        </Button>
-      </Form>
+      </Popover>
     </RegisterStep>
   );
 };

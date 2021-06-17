@@ -1,40 +1,52 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useMutation } from "@apollo/client";
 import { Typography, Divider } from "antd";
 import Div100vh from "react-div-100vh";
 import StepWizard from "react-step-wizard";
 import { CREATE_DEALER } from "../../../../apollo/queries/DealerQueries";
-import { LoadingOutlined } from "@ant-design/icons";
+import "../../../../styles/pages/DealershipSetupPage.css";
+import StaticLogo from "@khyberlabs/khyberkit.static-logo";
+import BoxElement from "@khyberlabs/khyberkit.box-element";
 
 import {
   RootUserStep,
-  ConfirmStep,
   DealershipStep,
-  BillingStep,
+  VerifyCodeStep,
 } from "./steps";
-
-import "../../../../styles/pages/DealershipSetupPage.css";
-import StaticLogo from "../../../App/StaticLogo";
-import BoxElement from "../../../App/BoxElement";
-import { useMediaQuery } from "react-responsive";
+import history from "../../../../utils/history";
+import AppLoader from "@khyberlabs/khyberkit.app-loader";
 
 const { Text } = Typography;
 
+
 const DealerSetupPage = () => {
-  const [createDealer, { loading }] = useMutation(CREATE_DEALER, {
-    onCompleted(data) {},
-  });
 
   const [state, setState] = useState({
     form: {},
     currentStep: 1,
   });
 
+  // If the page is refreshed, we want to make sure
+  // we've held on to values.
+  useEffect(() => {
+    if (window.location.hash !== "#access-code" && 
+      !state.form.code) {
+        console.log('here')
+      history.push('/register/#access-code')
+    }
+  }, [state.form.code])
+
+
+  const [createDealer, { loading }] = useMutation(CREATE_DEALER, {
+    onCompleted(data) {
+      
+    },
+  });
+
+
   const updateForm = (key, value) => {
     const { form } = state;
     form[key] = value;
-    console.log("Form updated", state);
-    console.log("email", state.form.email);
   };
 
   const onStepChange = (stats) => {
@@ -43,7 +55,9 @@ const DealerSetupPage = () => {
     setState({ ...state, currentStep });
   };
 
-  const onComplete = () => {
+
+  const onFinishClicked = () => {
+    console.log('ON FINISH CLICKED')
     const {
       firstName,
       lastName,
@@ -53,21 +67,20 @@ const DealerSetupPage = () => {
       name,
       dealerCode,
       address,
+      code
     } = state.form;
 
     createDealer({
       variables: {
-        user: { firstName, lastName, email, password },
-        dealer: { manufacturer, name, dealerCode },
-        address,
+        input: {
+          code,
+          user: { firstName, lastName, email, password },
+          dealer: { manufacturer, name, dealerCode },
+          address
+        }
       },
     });
-  };
-
-  const isMobile = useMediaQuery({maxWidth: 800})
-
-
-  
+  }
 
   const renderForm = () => {
     return (
@@ -76,7 +89,7 @@ const DealerSetupPage = () => {
           <Text style={{ fontSize: "16px" }} type="secondary" level={5}>
             Dealership setup
           </Text>
-          <Text type="secondary">{`Step ${state.currentStep} of 4`}</Text>
+          <Text type="secondary">{`Step ${state.currentStep} of 3`}</Text>
           
         </div>
         <Divider style={{marginTop: '10px'}}/>
@@ -85,42 +98,24 @@ const DealerSetupPage = () => {
             <StepWizard
               isHashEnabled={true}
               onStepChange={onStepChange}
-              initialStep={"billing-info"}
+              initialStep={"access-code"}
             >
-              <BillingStep
-                hashKey={"billing-info"}
+              <VerifyCodeStep
+                hashKey={"access-code"}
                 update={updateForm}
-                onComplete={onComplete}
               />
               <RootUserStep
                 hashKey={"root-user"}
                 update={updateForm}
                 email={state.form.email}
               />
-              <ConfirmStep
-                hashKey={"confirm-email"}
-                update={updateForm}
-                sentTo={state.form.email}
-              />
-              <DealershipStep hashKey={"dealership-info"} update={updateForm} />
+              <DealershipStep
+              onFinish={onFinishClicked} 
+              hashKey={"dealership-info"} 
+              update={updateForm} />
             </StepWizard>
           </div>
         </BoxElement>
-      </div>
-    );
-  };
-
-  const renderLoader = () => {
-    return (
-      <div style={{ width: "600px", marginTop: "200px" }}>
-        <LoadingOutlined
-          style={{ fontSize: "30px", marginBottom: "15px" }}
-          spin={true}
-        />
-        <br />
-        <Text style={{ fontSize: "16px" }} type="secondary">
-          Creating your dealership...
-        </Text>
       </div>
     );
   };
@@ -132,7 +127,7 @@ const DealerSetupPage = () => {
         <div className="responsive-page__flex-item__left-gutter"></div>
         <div className="responsive-page__flex-item__center">
           <div className="wizard-wrapper">
-            {loading ? renderLoader() : renderForm()}
+            {loading ? <AppLoader message="Loading..."/> : renderForm()}
           </div>
         </div>
         <div className="responsive-page__flex-item__right-gutter"></div>

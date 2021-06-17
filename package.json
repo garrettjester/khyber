@@ -3,12 +3,29 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@apollo/client": "^3.3.12",
+    "@apollo/client": "^3.3.20",
     "@craco/craco": "^6.1.1",
+    "@khyberlabs/khyberkit.app-loader": "^1.0.1",
+    "@khyberlabs/khyberkit.auth-form": "^1.0.0",
+    "@khyberlabs/khyberkit.box-element": "^1.0.0",
+    "@khyberlabs/khyberkit.center-x": "^1.0.0",
+    "@khyberlabs/khyberkit.center-y": "^1.0.0",
+    "@khyberlabs/khyberkit.mobile-menu": "^1.0.0",
+    "@khyberlabs/khyberkit.new-password-item": "^1.0.0",
+    "@khyberlabs/khyberkit.reset-password-form": "^1.0.0",
+    "@khyberlabs/khyberkit.responsive-input": "^1.0.0",
+    "@khyberlabs/khyberkit.scaffold": "^1.0.0",
+    "@khyberlabs/khyberkit.scroll-to-top": "^1.0.0",
+    "@khyberlabs/khyberkit.sign-in-form": "^1.0.0",
+    "@khyberlabs/khyberkit.site-footer": "^1.0.0",
+    "@khyberlabs/khyberkit.site-info": "^1.0.0",
+    "@khyberlabs/khyberkit.site-nav": "^1.0.0",
+    "@khyberlabs/khyberkit.social-stack": "^1.0.0",
+    "@khyberlabs/khyberkit.static-logo": "^1.0.1",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.8.3",
-    "antd": "^4.13.1",
+    "antd": "^4.16.2",
     "apollo-cache-persist": "^0.1.1",
     "apollo-link-error": "^1.1.13",
     "craco-less": "^1.17.1",
@@ -19,6 +36,7 @@
     "react-div-100vh": "^0.6.0",
     "react-dom": "^17.0.1",
     "react-hamburger-menu": "^1.2.1",
+    "react-loader-spinner": "^4.0.0",
     "react-plaid-link": "^3.1.0",
     "react-redux": "^7.2.3",
     "react-responsive": "^8.2.0",
@@ -61,5 +79,12 @@
   "devDependencies": {
     "less": "^4.1.1",
     "less-loader": "^8.0.0"
+  },
+  "bit": {
+    "env": {
+      "compiler": "bit.envs/compilers/react@6.0.0"
+    },
+    "componentsDefaultDirectory": "src/components/{name}",
+    "packageManager": "npm"
   }
 }
